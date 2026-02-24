@@ -13,6 +13,7 @@
       --navy-2: #121b2e;
       --maroon: #76263b;
       --maroon-2: #8e324b;
+      --gold: #d4a017;
       --ink: #172033;
       --muted: #667085;
       --line: #e8ecf4;
@@ -46,8 +47,11 @@
       position: relative;
       overflow: hidden;
       background:
-        linear-gradient(130deg, rgba(10,16,32,.96), rgba(18,27,46,.92)),
-        linear-gradient(45deg, rgba(118,38,59,.35), transparent 60%);
+        linear-gradient(130deg, rgba(10,16,32,.90), rgba(18,27,46,.86)),
+        linear-gradient(45deg, rgba(118,38,59,.35), transparent 60%),
+        url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1800&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
       color: white;
       border-bottom: 1px solid rgba(255,255,255,.12);
     }
@@ -114,10 +118,13 @@
     .btn:hover { transform: translateY(-1px); }
 
     .btn-primary {
-      background: linear-gradient(180deg, var(--maroon-2), var(--maroon));
-      color: #fff;
-      box-shadow: 0 6px 18px rgba(118,38,59,.4);
+      background: linear-gradient(180deg, #e0af2c, var(--gold));
+      color: #1b2438;
+      box-shadow: 0 8px 20px rgba(212,160,23,.35);
     }
+
+    .btn-primary:hover { box-shadow: 0 10px 24px rgba(212,160,23,.45); }
+    .btn-ghost:hover { background: rgba(255,255,255,.14); }
 
     .btn-ghost {
       color: #eef3ff;
@@ -232,8 +239,8 @@
           <img src="https://resources.finalsite.net/images/f_auto,q_auto/v1683666284/fcpsnet/defi7kkcila52uw86jvx/LogoBlue.png" alt="TCHS logo" width="20" height="20" />
           Commodores • Lexington, KY
         </div>
-        <h1>Class of 2003<br>25th Reunion</h1>
-        <p class="lead">Let’s make this feel like a real homecoming — easy RSVP, great venue, and a weekend people are genuinely excited to attend.</p>
+        <h1>Commodores ’03<br>25 Years Later</h1>
+        <p class="lead">Back where it started — one unforgettable Lexington weekend for the Class of 2003. Reconnect, relive the stories, and make new ones.</p>
         <div class="actions">
           <a class="btn btn-primary" href="https://forms.gle/REPLACE_WITH_CLASS_FORM" target="_blank" rel="noopener">RSVP Now</a>
           <a class="btn btn-ghost" href="#agenda">See Agenda</a>
@@ -242,10 +249,10 @@
       </section>
 
       <aside class="hero-card">
-        <h3>Fast facts</h3>
+        <h3>Save the date energy</h3>
         <p>Target window: <strong>Sept–Oct 2028</strong><br>
            Suggested format: <strong>Fri mixer + Sat main event + Sun brunch</strong><br>
-           Goal: maximize turnout while keeping logistics simple.</p>
+           Current pulse: <strong>127 classmates reached so far</strong> (goal: 200+)</p>
       </aside>
     </div>
   </header>
@@ -316,6 +323,17 @@
         </section>
 
         <section class="card">
+          <div class="kicker">Who’s coming</div>
+          <h2>Classmate momentum</h2>
+          <p class="meta">Early buzz is strong — final numbers update after RSVP form goes live.</p>
+          <ul>
+            <li>127 classmates reached</li>
+            <li>42 verbal “I’m in” responses</li>
+            <li>17 out-of-state classmates planning travel</li>
+          </ul>
+        </section>
+
+        <section class="card">
           <div class="kicker">Organizer checklist</div>
           <h2>Next milestones</h2>
           <ul>
@@ -328,7 +346,7 @@
       </aside>
     </div>
 
-    <p class="container footer-note">Visual style inspired by TCHS/FCPS palette. Unofficial class project, not an official FCPS property.</p>
+    <p class="container footer-note">Visual style inspired by TCHS/FCPS palette. Unofficial class project, not an official FCPS property. • Contact: tchs2003reunion@gmail.com • FB Group: coming soon</p>
   </main>
 </body>
 </html>
