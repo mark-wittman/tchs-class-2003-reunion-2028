@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tates Creek High School — Class of 2003 | 25th Reunion (Mockup)</title>
+  <style>
+    :root {
+      --tchs-navy: #0a0e14;
+      --tchs-maroon: #76263b;
+      --tchs-light: #e6e6e6;
+      --white: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --ok: #0f766e;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text);
+      background: #f8fafc;
+      line-height: 1.45;
+    }
+
+    .topbar {
+      background: var(--tchs-navy);
+      color: var(--white);
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+
+    .hero {
+      background: linear-gradient(130deg, var(--tchs-navy), #151b28 55%, var(--tchs-maroon));
+      color: var(--white);
+      padding: 2.4rem 1rem 2.2rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 1.25rem;
+      grid-template-columns: 98px 1fr;
+      align-items: center;
+    }
+
+    .logo {
+      width: 88px;
+      height: 88px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.08);
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.2);
+      overflow: hidden;
+    }
+
+    .logo img { width: 76px; height: 76px; object-fit: contain; }
+
+    h1 {
+      margin: 0 0 .25rem;
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      line-height: 1.15;
+    }
+
+    .lead { margin: 0; color: #dbeafe; font-size: 1.02rem; }
+
+    .hero-actions {
+      margin-top: 1rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem;
+    }
+
+    .btn {
+      border: 0;
+      border-radius: 999px;
+      padding: .62rem 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary { background: var(--tchs-maroon); color: var(--white); }
+    .btn-secondary { background: rgba(255,255,255,.13); color: var(--white); border: 1px solid rgba(255,255,255,.2); }
+
+    main { padding: 1.2rem 1rem 2rem; }
+
+    .grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: 1.35fr 1fr;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid #e5e7eb;
+      border-radius: 14px;
+      padding: 1rem;
+      box-shadow: 0 6px 24px rgba(16,24,40,.05);
+    }
+
+    .card h2, .card h3 { margin-top: 0; }
+    .section-label { font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+
+    .agenda-item {
+      border-left: 3px solid var(--tchs-maroon);
+      padding: .2rem 0 .2rem .75rem;
+      margin: .75rem 0;
+    }
+
+    .meta { color: var(--muted); font-size: .93rem; }
+
+    .rsvp-list, .checklist {
+      margin: 0;
+      padding-left: 1.15rem;
+    }
+
+    .pill {
+      display: inline-block;
+      font-size: .8rem;
+      border-radius: 999px;
+      padding: .2rem .6rem;
+      background: #ecfeff;
+      color: var(--ok);
+      border: 1px solid #ccfbf1;
+      margin: .3rem .3rem 0 0;
+    }
+
+    form {
+      display: grid;
+      gap: .6rem;
+      margin-top: .7rem;
+    }
+
+    input, select, textarea {
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      padding: .6rem .75rem;
+      font: inherit;
+      width: 100%;
+    }
+
+    .foot {
+      margin-top: 1rem;
+      color: var(--muted);
+      font-size: .85rem;
+      text-align: center;
+    }
+
+    @media (max-width: 900px) {
+      .grid { grid-template-columns: 1fr; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; }
+      .logo { margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">Mockup concept for planning — Tates Creek High School Class of 2003 Reunion (2028)</div>
+
+  <header class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="logo">
+          <img src="https://resources.finalsite.net/images/f_auto,q_auto/v1683666284/fcpsnet/defi7kkcila52uw86jvx/LogoBlue.png" alt="Tates Creek High School logo" />
+        </div>
+        <div>
+          <h1>Tates Creek High School<br>Class of 2003 — 25th Reunion</h1>
+          <p class="lead">Lexington, Kentucky • Summer/Fall 2028 • Let’s get the Commodores back together.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#rsvp">RSVP Interest</a>
+            <a class="btn btn-secondary" href="#agenda">View Draft Agenda</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="container grid">
+      <section class="card" id="agenda">
+        <div class="section-label">Suggested weekend format</div>
+        <h2>Draft 3-part agenda (best-practice format)</h2>
+        <p class="meta">Why this works: low-pressure welcome, main event, optional family-friendly closeout.</p>
+
+        <div class="agenda-item">
+          <h3>Friday Night — Welcome Mixer</h3>
+          <div class="meta">7:00–10:00 PM • Casual bar/rooftop in Lexington</div>
+          <p>Name tags, throwback playlist, slideshow wall, first reconnects.</p>
+        </div>
+
+        <div class="agenda-item">
+          <h3>Saturday — Main Reunion Event</h3>
+          <div class="meta">6:00–11:00 PM • Signature venue + dinner + remarks</div>
+          <p>Class memory reel, “where are we now” 90-second share-outs, teachers/coaches shoutouts, photo booth.</p>
+        </div>
+
+        <div class="agenda-item">
+          <h3>Sunday — Family Brunch / School Walkthrough</h3>
+          <div class="meta">10:30 AM–12:30 PM • Optional</div>
+          <p>Great for people traveling with spouses/kids and one last goodbye window.</p>
+        </div>
+
+        <h3>Possible venue ideas in Lexington</h3>
+        <ul>
+          <li>Downtown hotel ballroom (easy for out-of-town classmates)</li>
+          <li>Private event space near Distillery District</li>
+          <li>Country club / banquet venue with parking + AV</li>
+        </ul>
+      </section>
+
+      <aside class="card" id="rsvp">
+        <div class="section-label">RSVP + planning infrastructure</div>
+        <h2>RSVP structure to launch now</h2>
+        <ul class="rsvp-list">
+          <li>Collect: name, +1, city/state, email, phone</li>
+          <li>Capture attendance confidence: Yes / Maybe / Can’t make it</li>
+          <li>Ask shirt size + dietary needs early (helps ordering later)</li>
+          <li>Track payment status separately once pricing is set</li>
+        </ul>
+
+        <span class="pill">Fast form: Google Form</span>
+        <span class="pill">Ticketing: Eventbrite / RSVPify</span>
+        <span class="pill">Updates: private FB group + email list</span>
+
+        <form>
+          <input type="text" placeholder="Full name (as in 2003 yearbook)" />
+          <input type="email" placeholder="Best email" />
+          <select>
+            <option>I plan to attend</option>
+            <option>Maybe — keep me posted</option>
+            <option>Can’t attend but share updates/photos</option>
+          </select>
+          <textarea rows="3" placeholder="Any classmates we should make sure to contact?"></textarea>
+          <button class="btn btn-primary" type="button">Submit RSVP Interest</button>
+        </form>
+
+        <h3 style="margin-top:1rem;">Organizer checklist (high impact)</h3>
+        <ul class="checklist">
+          <li>Book date/venue 9–12 months out</li>
+          <li>Publish schedule + hotel block by spring 2028</li>
+          <li>Post monthly classmate spotlight updates</li>
+          <li>Create memory gallery (senior photos + then/now)</li>
+        </ul>
+      </aside>
+    </div>
+
+    <p class="foot">Design note: visual style inspired by TCHS/FCPS branding cues (navy + maroon palette). This is an unofficial planning mockup, not an official school site.</p>
+  </main>
+</body>
+</html>
