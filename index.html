@@ -3,269 +3,332 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tates Creek High School — Class of 2003 | 25th Reunion (Mockup)</title>
+  <title>TCHS Class of 2003 — 25th Reunion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --tchs-navy: #0a0e14;
-      --tchs-maroon: #76263b;
-      --tchs-light: #e6e6e6;
-      --white: #ffffff;
-      --text: #1f2937;
-      --muted: #6b7280;
-      --ok: #0f766e;
+      --navy: #0b1220;
+      --navy-2: #121b2e;
+      --maroon: #76263b;
+      --maroon-2: #8e324b;
+      --ink: #172033;
+      --muted: #667085;
+      --line: #e8ecf4;
+      --bg: #f6f8fc;
+      --card: #ffffff;
+      --radius: 16px;
+      --shadow: 0 12px 30px rgba(15, 23, 42, .08);
     }
 
     * { box-sizing: border-box; }
+    html, body { margin: 0; }
     body {
-      margin: 0;
-      font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      color: var(--text);
-      background: #f8fafc;
-      line-height: 1.45;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background: radial-gradient(1200px 500px at 20% -10%, #dde8ff 0, transparent 60%), var(--bg);
+      line-height: 1.5;
     }
 
-    .topbar {
-      background: var(--tchs-navy);
-      color: var(--white);
-      padding: 0.6rem 1rem;
-      font-size: 0.9rem;
+    .container { width: min(1100px, 92vw); margin: 0 auto; }
+
+    .topline {
+      font-size: 13px;
+      letter-spacing: .02em;
+      color: #d5dcf3;
       text-align: center;
+      background: #0a1020;
+      padding: 10px 12px;
     }
 
     .hero {
-      background: linear-gradient(130deg, var(--tchs-navy), #151b28 55%, var(--tchs-maroon));
-      color: var(--white);
-      padding: 2.4rem 1rem 2.2rem;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(130deg, rgba(10,16,32,.96), rgba(18,27,46,.92)),
+        linear-gradient(45deg, rgba(118,38,59,.35), transparent 60%);
+      color: white;
+      border-bottom: 1px solid rgba(255,255,255,.12);
     }
 
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(500px 300px at 90% 10%, rgba(118,38,59,.45), transparent 70%);
+      pointer-events: none;
     }
 
-    .hero-grid {
+    .hero-inner {
+      position: relative;
+      z-index: 1;
       display: grid;
-      gap: 1.25rem;
-      grid-template-columns: 98px 1fr;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 24px;
+      padding: 42px 0 36px;
       align-items: center;
     }
 
-    .logo {
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.08);
-      display: grid;
-      place-items: center;
+    .brandline {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 12px;
       border: 1px solid rgba(255,255,255,.2);
-      overflow: hidden;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #dbe6ff;
+      margin-bottom: 14px;
     }
-
-    .logo img { width: 76px; height: 76px; object-fit: contain; }
 
     h1 {
-      margin: 0 0 .25rem;
-      font-size: clamp(1.35rem, 3vw, 2rem);
-      line-height: 1.15;
+      margin: 0;
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1.03;
+      letter-spacing: -0.03em;
     }
 
-    .lead { margin: 0; color: #dbeafe; font-size: 1.02rem; }
-
-    .hero-actions {
-      margin-top: 1rem;
-      display: flex;
-      flex-wrap: wrap;
-      gap: .65rem;
+    .lead {
+      margin: 16px 0 22px;
+      color: #ced9f8;
+      max-width: 58ch;
+      font-size: 17px;
     }
+
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
 
     .btn {
       border: 0;
-      border-radius: 999px;
-      padding: .62rem 1rem;
-      font-weight: 600;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-weight: 700;
+      font-size: 14px;
       cursor: pointer;
       text-decoration: none;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: .2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: linear-gradient(180deg, var(--maroon-2), var(--maroon));
+      color: #fff;
+      box-shadow: 0 6px 18px rgba(118,38,59,.4);
     }
 
-    .btn-primary { background: var(--tchs-maroon); color: var(--white); }
-    .btn-secondary { background: rgba(255,255,255,.13); color: var(--white); border: 1px solid rgba(255,255,255,.2); }
+    .btn-ghost {
+      color: #eef3ff;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.2);
+    }
 
-    main { padding: 1.2rem 1rem 2rem; }
+    .hero-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: var(--radius);
+      padding: 16px;
+      backdrop-filter: blur(6px);
+    }
+
+    .hero-card h3 { margin: 0 0 8px; font-size: 16px; }
+    .hero-card p { margin: 0; color: #d9e2ff; font-size: 14px; }
+
+    main { padding: 26px 0 34px; }
 
     .grid {
       display: grid;
-      gap: 1rem;
-      grid-template-columns: 1.35fr 1fr;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 16px;
     }
 
     .card {
-      background: var(--white);
-      border: 1px solid #e5e7eb;
-      border-radius: 14px;
-      padding: 1rem;
-      box-shadow: 0 6px 24px rgba(16,24,40,.05);
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
     }
 
-    .card h2, .card h3 { margin-top: 0; }
-    .section-label { font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
-
-    .agenda-item {
-      border-left: 3px solid var(--tchs-maroon);
-      padding: .2rem 0 .2rem .75rem;
-      margin: .75rem 0;
-    }
-
-    .meta { color: var(--muted); font-size: .93rem; }
-
-    .rsvp-list, .checklist {
-      margin: 0;
-      padding-left: 1.15rem;
-    }
-
-    .pill {
-      display: inline-block;
-      font-size: .8rem;
-      border-radius: 999px;
-      padding: .2rem .6rem;
-      background: #ecfeff;
-      color: var(--ok);
-      border: 1px solid #ccfbf1;
-      margin: .3rem .3rem 0 0;
-    }
-
-    form {
-      display: grid;
-      gap: .6rem;
-      margin-top: .7rem;
-    }
-
-    input, select, textarea {
-      border: 1px solid #d1d5db;
-      border-radius: 10px;
-      padding: .6rem .75rem;
-      font: inherit;
-      width: 100%;
-    }
-
-    .foot {
-      margin-top: 1rem;
+    .kicker {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
       color: var(--muted);
-      font-size: .85rem;
-      text-align: center;
+      margin-bottom: 8px;
+      font-weight: 700;
     }
 
-    @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr; }
-      .hero-grid { grid-template-columns: 1fr; text-align: center; }
-      .logo { margin: 0 auto; }
-      .hero-actions { justify-content: center; }
-      .hero-actions .btn, form .btn { width: 100%; text-align: center; }
+    h2 { margin: 0 0 8px; font-size: 24px; letter-spacing: -0.02em; }
+    h3 { margin: 16px 0 8px; font-size: 18px; }
+    .meta { color: var(--muted); font-size: 14px; }
+
+    .timeline { margin-top: 12px; display: grid; gap: 10px; }
+    .step {
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--maroon);
+      border-radius: 12px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .step strong { display: block; margin-bottom: 4px; }
+    ul { margin: 8px 0 0; padding-left: 18px; }
+    li { margin: 6px 0; }
+
+    .venue-highlight {
+      border: 1px dashed #d9c0c8;
+      background: linear-gradient(180deg, #fff, #fff8fa);
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 12px;
+    }
+
+    .stack { display: grid; gap: 12px; }
+
+    .tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid #d9def0;
+      background: #f8faff;
+      color: #344054;
+      font-size: 12px;
+      margin: 4px 6px 0 0;
+      font-weight: 600;
+    }
+
+    .rsvp-box {
+      background: #f8faff;
+      border: 1px solid #dce5fb;
+      border-radius: 12px;
+      padding: 12px;
+      margin-top: 12px;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 16px;
+    }
+
+    @media (max-width: 920px) {
+      .hero-inner, .grid { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .hero { text-align: left; }
     }
   </style>
 </head>
 <body>
-  <div class="topbar">Mockup concept for planning — Tates Creek High School Class of 2003 Reunion (2028)</div>
+  <div class="topline">Unofficial planning site • Tates Creek High School Class of 2003 • 25th Reunion (2028)</div>
 
   <header class="hero">
-    <div class="container">
-      <div class="hero-grid">
-        <div class="logo">
-          <img src="https://resources.finalsite.net/images/f_auto,q_auto/v1683666284/fcpsnet/defi7kkcila52uw86jvx/LogoBlue.png" alt="Tates Creek High School logo" />
+    <div class="container hero-inner">
+      <section>
+        <div class="brandline">
+          <img src="https://resources.finalsite.net/images/f_auto,q_auto/v1683666284/fcpsnet/defi7kkcila52uw86jvx/LogoBlue.png" alt="TCHS logo" width="20" height="20" />
+          Commodores • Lexington, KY
         </div>
-        <div>
-          <h1>Tates Creek High School<br>Class of 2003 — 25th Reunion</h1>
-          <p class="lead">Lexington, Kentucky • Summer/Fall 2028 • Let’s get the Commodores back together.</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="https://forms.gle/REPLACE_WITH_CLASS_FORM" target="_blank" rel="noopener">RSVP Now</a>
-            <a class="btn btn-secondary" href="#agenda">View Draft Agenda</a>
-            <a class="btn btn-secondary" href="mailto:tchs2003reunion@gmail.com?subject=TCHS%202003%20Reunion%20Question">Contact Organizers</a>
-          </div>
+        <h1>Class of 2003<br>25th Reunion</h1>
+        <p class="lead">Let’s make this feel like a real homecoming — easy RSVP, great venue, and a weekend people are genuinely excited to attend.</p>
+        <div class="actions">
+          <a class="btn btn-primary" href="https://forms.gle/REPLACE_WITH_CLASS_FORM" target="_blank" rel="noopener">RSVP Now</a>
+          <a class="btn btn-ghost" href="#agenda">See Agenda</a>
+          <a class="btn btn-ghost" href="mailto:tchs2003reunion@gmail.com?subject=TCHS%202003%20Reunion%20Question">Contact Organizers</a>
         </div>
-      </div>
+      </section>
+
+      <aside class="hero-card">
+        <h3>Fast facts</h3>
+        <p>Target window: <strong>Sept–Oct 2028</strong><br>
+           Suggested format: <strong>Fri mixer + Sat main event + Sun brunch</strong><br>
+           Goal: maximize turnout while keeping logistics simple.</p>
+      </aside>
     </div>
   </header>
 
   <main>
     <div class="container grid">
       <section class="card" id="agenda">
-        <div class="section-label">Suggested weekend format</div>
-        <h2>Draft 3-part agenda (best-practice format)</h2>
-        <p class="meta">Why this works: low-pressure welcome, main event, optional family-friendly closeout.</p>
+        <div class="kicker">Weekend plan</div>
+        <h2>Agenda that actually works</h2>
+        <p class="meta">Designed for both local classmates and fly-ins.</p>
 
-        <div class="agenda-item">
-          <h3>Friday Night — Welcome Mixer</h3>
-          <div class="meta">7:00–10:00 PM • Casual bar/rooftop in Lexington</div>
-          <p>Name tags, throwback playlist, slideshow wall, first reconnects.</p>
+        <div class="timeline">
+          <article class="step">
+            <strong>Friday (7:00–10:00 PM) — Welcome Mixer</strong>
+            Casual kickoff, name tags, throwback playlist, photo station.
+          </article>
+          <article class="step">
+            <strong>Saturday (6:00–11:00 PM) — Main Reunion Night</strong>
+            Dinner, short remarks, class memories reel, and plenty of hang time.
+          </article>
+          <article class="step">
+            <strong>Sunday (10:30 AM–12:30 PM) — Optional Brunch</strong>
+            Family-friendly wrap-up before departures.
+          </article>
         </div>
 
-        <div class="agenda-item">
-          <h3>Saturday — Main Reunion Event</h3>
-          <div class="meta">6:00–11:00 PM • Signature venue + dinner + remarks</div>
-          <p>Class memory reel, “where are we now” 90-second share-outs, teachers/coaches shoutouts, photo booth.</p>
-        </div>
-
-        <div class="agenda-item">
-          <h3>Sunday — Family Brunch / School Walkthrough</h3>
-          <div class="meta">10:30 AM–12:30 PM • Optional</div>
-          <p>Great for people traveling with spouses/kids and one last goodbye window.</p>
-        </div>
-
-        <h3>Venue shortlist (v1.1)</h3>
+        <h3>Venue shortlist</h3>
         <ul>
-          <li><strong>The Campbell House</strong> — classic Lexington feel, good for ballroom-style main event</li>
-          <li><strong>Hilton Lexington/Downtown</strong> — central location, easy hotel logistics for out-of-town classmates</li>
-          <li><strong>Marriott Griffin Gate</strong> — large-capacity option with parking + room block potential</li>
-          <li><strong>21c Museum Hotel</strong> — modern vibe for Friday mixer + photo-heavy atmosphere</li>
-          <li><strong>The Mane on Main</strong> — rooftop/social setting for casual kickoff</li>
+          <li>The Campbell House</li>
+          <li>Hilton Lexington/Downtown</li>
+          <li>Marriott Griffin Gate</li>
+          <li>21c Museum Hotel</li>
+          <li>The Mane on Main</li>
         </ul>
 
-        <h3>Top 2 picks + budget range</h3>
-        <ul>
-          <li><strong>#1 The Campbell House</strong> — Estimated all-in event budget: <strong>$95–$140 per person</strong> (space + food/beverage + basic AV)</li>
-          <li><strong>#2 Hilton Lexington/Downtown</strong> — Estimated all-in event budget: <strong>$110–$165 per person</strong> (strongest option for out-of-town hotel convenience)</li>
-        </ul>
-        <p class="meta">Selection criteria: central location, parking/hotel access, AV support, flexible food-and-beverage minimums, and clear weather backup.</p>
+        <div class="venue-highlight">
+          <strong>Top 2 picks + estimated budget</strong>
+          <ul>
+            <li><strong>#1 Campbell House:</strong> ~$95–$140 per person</li>
+            <li><strong>#2 Hilton Lexington/Downtown:</strong> ~$110–$165 per person</li>
+          </ul>
+        </div>
       </section>
 
-      <aside class="card" id="rsvp">
-        <div class="section-label">RSVP + planning infrastructure</div>
-        <h2>RSVP structure to launch now</h2>
-        <ul class="rsvp-list">
-          <li>Collect: name, +1, city/state, email, phone</li>
-          <li>Capture attendance confidence: Yes / Maybe / Can’t make it</li>
-          <li>Ask shirt size + dietary needs early (helps ordering later)</li>
-          <li>Track payment status separately once pricing is set</li>
-        </ul>
+      <aside class="stack">
+        <section class="card">
+          <div class="kicker">RSVP flow</div>
+          <h2>Make signup frictionless</h2>
+          <p class="meta">One form now, ticketing link when pricing is final.</p>
 
-        <span class="pill">Fast form: Google Form</span>
-        <span class="pill">Ticketing: Eventbrite / RSVPify</span>
-        <span class="pill">Updates: private FB group + email list</span>
+          <div>
+            <span class="tag">Google Form</span>
+            <span class="tag">Eventbrite (later)</span>
+            <span class="tag">Email updates</span>
+          </div>
 
-        <form>
-          <input type="text" placeholder="Full name (as in 2003 yearbook)" />
-          <input type="email" placeholder="Best email" />
-          <select>
-            <option>I plan to attend</option>
-            <option>Maybe — keep me posted</option>
-            <option>Can’t attend but share updates/photos</option>
-          </select>
-          <textarea rows="3" placeholder="Any classmates we should make sure to contact?"></textarea>
-          <a class="btn btn-primary" href="https://forms.gle/REPLACE_WITH_CLASS_FORM" target="_blank" rel="noopener">Open RSVP Form</a>
-          <a class="btn" style="background:#eef2ff;color:#1f2937;border:1px solid #c7d2fe;" href="https://www.eventbrite.com/" target="_blank" rel="noopener">Buy Tickets (when live)</a>
-        </form>
+          <div class="rsvp-box">
+            <strong>Needed fields:</strong>
+            <ul>
+              <li>Full name + preferred contact</li>
+              <li>Attendance confidence (yes/maybe/no)</li>
+              <li>+1, dietary notes, city/state</li>
+            </ul>
+            <div class="actions" style="margin-top:10px;">
+              <a class="btn btn-primary" href="https://forms.gle/REPLACE_WITH_CLASS_FORM" target="_blank" rel="noopener">Open RSVP Form</a>
+            </div>
+          </div>
+        </section>
 
-        <h3 style="margin-top:1rem;">Organizer checklist (high impact)</h3>
-        <ul class="checklist">
-          <li>Book date/venue 9–12 months out</li>
-          <li>Publish schedule + hotel block by spring 2028</li>
-          <li>Post monthly classmate spotlight updates</li>
-          <li>Create memory gallery (senior photos + then/now)</li>
-        </ul>
+        <section class="card">
+          <div class="kicker">Organizer checklist</div>
+          <h2>Next milestones</h2>
+          <ul>
+            <li>Lock venue + date window</li>
+            <li>Publish hotel block details</li>
+            <li>Launch monthly class spotlight posts</li>
+            <li>Collect throwback photos for memory reel</li>
+          </ul>
+        </section>
       </aside>
     </div>
 
-    <p class="foot">Design note: visual style inspired by TCHS/FCPS branding cues (navy + maroon palette). This is an unofficial planning mockup, not an official school site.</p>
+    <p class="container footer-note">Visual style inspired by TCHS/FCPS palette. Unofficial class project, not an official FCPS property.</p>
   </main>
 </body>
 </html>
