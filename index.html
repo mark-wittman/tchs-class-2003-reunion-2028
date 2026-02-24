@@ -4,345 +4,966 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Commodores '03 – 25 Years Later! | TCHS Class of 2003 Reunion</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            'tchs-navy': '#0a0e14',
-            'tchs-maroon': '#76263b',
-            'commodore-gold': '#D4A017',
-            'commodore-gold-dark': '#B88A0F',
-          }
-        }
-      }
-    }
-  </script>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-    
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0a0e14;
+      --navy-mid:    #131922;
+      --maroon:      #76263b;
+      --gold:        #D4A017;
+      --gold-dark:   #B88A0F;
+      --gold-light:  #FEF3C7;
+      --cream:       #faf8f4;
+      --gray-50:     #f9fafb;
+      --gray-100:    #f3f4f6;
+      --gray-200:    #e5e7eb;
+      --gray-300:    #d1d5db;
+      --gray-500:    #6b7280;
+      --gray-600:    #4b5563;
+      --gray-700:    #374151;
+      --gray-800:    #1f2937;
+      --gray-900:    #111827;
+      --green-600:   #16a34a;
+      --blue-600:    #2563eb;
+      --radius-sm:   6px;
+      --radius-md:   12px;
+      --radius-lg:   20px;
+      --radius-xl:   28px;
+      --shadow-sm:   0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md:   0 4px 16px rgba(0,0,0,.10), 0 2px 6px rgba(0,0,0,.07);
+      --shadow-lg:   0 10px 40px rgba(0,0,0,.14), 0 4px 12px rgba(0,0,0,.09);
+      --shadow-gold: 0 4px 14px rgba(212,160,23,.38);
+      --transition:  0.18s ease;
+      --font-sans:   -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-serif:  Georgia, "Times New Roman", Times, serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      font-family: var(--font-sans);
+      background: var(--cream);
+      color: var(--gray-800);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    
-    .hero-bg {
-      background: linear-gradient(135deg, rgba(10,14,20,0.92) 0%, rgba(118,38,59,0.88) 100%),
-                  url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1920&auto=format&fit=crop&q=80') center/cover no-repeat;
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== TOPBAR ===== */
+    .topbar {
+      background: var(--navy);
+      color: rgba(255,255,255,.82);
+      text-align: center;
+      font-size: 13px;
+      padding: 9px 16px;
+      letter-spacing: .01em;
     }
-    
-    .card-hover {
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    .topbar strong { color: var(--gold); }
+
+    /* ===== HERO ===== */
+    /*
+      Yearbook-style hero: sepia-toned layered CSS gradients evoking
+      a 2003 high school yearbook page — warm amber/sepia tones with
+      deep navy overlay, simulating a faded photograph effect.
+      alumniclass.com photos require login, so we use a pure-CSS
+      generative background that evokes vintage yearbook nostalgia.
+    */
+    .hero {
+      position: relative;
+      min-height: 480px;
+      display: flex;
+      align-items: center;
+      padding: 64px 16px;
+      overflow: hidden;
     }
-    
-    .card-hover:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.12), 0 8px 16px rgba(0,0,0,0.08);
+
+    /* Multi-layer CSS yearbook background — faded sepia photo effect */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      /* Simulate a faded yearbook photo with gradient layers */
+      background:
+        /* Dark navy overlay for text legibility */
+        linear-gradient(
+          160deg,
+          rgba(10,14,20,.88) 0%,
+          rgba(10,14,20,.72) 45%,
+          rgba(118,38,59,.80) 100%
+        ),
+        /* Sepia tone layer — warm amber/brown yearbook feel */
+        linear-gradient(
+          45deg,
+          rgba(139,90,43,.55) 0%,
+          rgba(180,140,80,.40) 30%,
+          rgba(210,175,110,.30) 60%,
+          rgba(139,90,43,.50) 100%
+        ),
+        /* Deep textured "paper" background tones */
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,0) 0px,
+          rgba(255,255,255,0) 3px,
+          rgba(200,160,90,.03) 3px,
+          rgba(200,160,90,.03) 4px
+        ),
+        /* Base warm amber — yearbook pages were never pure white */
+        linear-gradient(135deg, #2a1a0e 0%, #1a0f08 40%, #0d1520 70%, #0a0e14 100%);
+      z-index: 0;
     }
-    
+
+    /* Grain/halftone texture overlay — old photo grain */
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(ellipse at 20% 30%, rgba(212,160,23,.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 70%, rgba(118,38,59,.12) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 50%, rgba(180,140,60,.06) 0%, transparent 70%);
+      z-index: 0;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1080px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    /* Vintage yearbook decorative border */
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(212,160,23,.15);
+      border: 1px solid rgba(212,160,23,.40);
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 18px;
+    }
+    .hero-badge::before { content: "◆"; font-size: 8px; }
+
+    .hero h1 {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 3.6rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 20px rgba(0,0,0,.50);
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: clamp(15px, 2vw, 18px);
+      color: rgba(255,255,255,.72);
+      max-width: 540px;
+      margin-bottom: 32px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 100px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      min-height: 44px;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition), color var(--transition);
+      letter-spacing: .01em;
+      white-space: nowrap;
+    }
+
     .btn-gold {
-      background-color: #D4A017;
-      color: #0a0e14;
-      transition: all 0.15s ease;
+      background: var(--gold);
+      color: var(--navy);
+      border-color: var(--gold);
     }
-    
     .btn-gold:hover {
-      background-color: #B88A0F;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(212,160,23,0.35);
+      background: var(--gold-dark);
+      border-color: var(--gold-dark);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-gold);
     }
-    
-    .btn-outline-gold {
+    .btn-gold:active { transform: translateY(0); }
+
+    .btn-outline {
       background: transparent;
-      border: 2px solid #D4A017;
-      color: #D4A017;
-      transition: all 0.15s ease;
+      color: var(--gold);
+      border-color: rgba(212,160,23,.70);
     }
-    
-    .btn-outline-gold:hover {
-      background-color: #D4A017;
-      color: #0a0e14;
+    .btn-outline:hover {
+      background: var(--gold);
+      color: var(--navy);
+      border-color: var(--gold);
+      transform: translateY(-2px);
     }
-    
+
+    .btn-ghost {
+      background: rgba(255,255,255,.10);
+      color: #fff;
+      border-color: rgba(255,255,255,.25);
+      backdrop-filter: blur(4px);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,.20);
+      transform: translateY(-2px);
+    }
+
+    .btn svg { flex-shrink: 0; width: 16px; height: 16px; }
+
+    /* ===== LIVE RSVP PULSE ===== */
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(22,163,74,.15);
+      border: 1px solid rgba(22,163,74,.35);
+      color: #4ade80;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .live-dot {
+      width: 7px;
+      height: 7px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .4; transform: scale(.75); }
+    }
+
+    /* ===== LAYOUT ===== */
+    .page-wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .section { padding: 48px 0; }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    /* ===== SECTION LABEL ===== */
+    .section-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+    .eyebrow-bar {
+      width: 24px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--gold);
+    }
+    .eyebrow-text {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--gray-500);
+    }
+
+    /* ===== CARDS ===== */
+    .card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card h2 {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--gray-900);
+      margin-bottom: 8px;
+    }
+
+    .card-desc {
+      font-size: 14px;
+      color: var(--gray-500);
+      margin-bottom: 24px;
+    }
+
+    /* ===== AGENDA ITEMS ===== */
+    .agenda-list { list-style: none; }
     .agenda-item {
-      border-left: 3px solid #D4A017;
-      padding-left: 1rem;
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--gray-100);
     }
-    
-    .pill {
-      background: #FEF3C7;
-      color: #92400E;
-      border: 1px solid #FDE68A;
+    .agenda-item:last-child { border-bottom: none; }
+
+    .agenda-num {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: var(--gold-light);
+      color: #92400e;
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
     }
-    
-    /* Ensure minimum 44px touch targets on mobile */
-    @media (max-width: 640px) {
-      .btn-touch { min-height: 44px; }
-      .touch-target { min-height: 44px; }
+
+    .agenda-title { font-weight: 600; color: var(--gray-900); font-size: 15px; }
+    .agenda-time { font-size: 12px; color: var(--gray-500); margin: 2px 0 4px; }
+    .agenda-desc { font-size: 13px; color: var(--gray-600); line-height: 1.5; }
+
+    /* ===== VENUE TABLE ===== */
+    .venue-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .venue-row {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 12px 14px;
+      background: var(--gray-50);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--gray-100);
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .venue-row:hover {
+      background: #fffbeb;
+      border-color: rgba(212,160,23,.30);
+    }
+
+    .venue-rank {
+      flex-shrink: 0;
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--gold-dark);
+      width: 18px;
+      margin-top: 1px;
+    }
+
+    .venue-name { font-weight: 600; font-size: 14px; color: var(--gray-900); }
+    .venue-detail { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+
+    /* ===== RSVP CARD ===== */
+    .rsvp-note {
+      display: flex;
+      gap: 10px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      font-size: 13px;
+      color: var(--gray-600);
+      margin-top: 16px;
+    }
+    .rsvp-note-icon { font-size: 16px; flex-shrink: 0; }
+
+    .rsvp-form-status {
+      text-align: center;
+      padding: 16px;
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border: 1px solid rgba(212,160,23,.30);
+      border-radius: var(--radius-md);
+      margin-bottom: 16px;
+    }
+    .rsvp-form-status-title {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--gray-900);
+      margin-bottom: 4px;
+    }
+    .rsvp-form-status-sub {
+      font-size: 12px;
+      color: var(--gray-600);
+    }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0; }
+    .tag {
+      background: var(--gold-light);
+      color: #92400e;
+      border: 1px solid #fde68a;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    .check-list { list-style: none; }
+    .check-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--gray-700);
+      padding: 8px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .check-list li:last-child { border-bottom: none; }
+    .check-icon {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #dcfce7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .check-icon svg { width: 10px; height: 10px; color: var(--green-600); }
+
+    /* ===== CHECKLIST CARD ===== */
+    .todo-list { list-style: none; }
+    .todo-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--gray-100);
+    }
+    .todo-item:last-child { border-bottom: none; }
+    .todo-box {
+      flex-shrink: 0;
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--gray-300);
+      border-radius: 4px;
+      background: #fff;
+    }
+    .todo-text { font-size: 14px; color: var(--gray-700); }
+
+    /* ===== NOSTALGIA STRIP ===== */
+    .nostalgia-strip {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 100%);
+      padding: 40px 16px;
+      text-align: center;
+    }
+    .nostalgia-strip h2 {
+      font-family: var(--font-serif);
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      color: #fff;
+      margin-bottom: 8px;
+    }
+    .nostalgia-strip p { font-size: 15px; color: rgba(255,255,255,.60); margin-bottom: 24px; }
+    .nostalgia-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .nostalgia-item {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radius-md);
+      padding: 14px 20px;
+      font-size: 13px;
+      color: rgba(255,255,255,.80);
+      min-width: 130px;
+      transition: background var(--transition);
+    }
+    .nostalgia-item:hover { background: rgba(212,160,23,.12); border-color: rgba(212,160,23,.35); }
+    .nostalgia-item .ni-year { font-weight: 700; color: var(--gold); font-size: 11px; letter-spacing: .06em; display: block; margin-bottom: 2px; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--navy);
+      color: rgba(255,255,255,.65);
+      padding: 48px 16px 32px;
+    }
+
+    .footer-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .footer-brand h3 {
+      font-family: var(--font-serif);
+      font-size: 20px;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .footer-brand p { font-size: 13px; line-height: 1.6; }
+
+    .footer-col h4 {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.50);
+      margin-bottom: 14px;
+    }
+
+    .footer-links { list-style: none; }
+    .footer-links li { margin-bottom: 10px; }
+    .footer-links a {
+      font-size: 14px;
+      color: rgba(255,255,255,.65);
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-contact-email {
+      color: var(--gold);
+      font-size: 14px;
+      transition: color var(--transition);
+    }
+    .footer-contact-email:hover { color: #fff; }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 24px;
+      text-align: center;
+      font-size: 12px;
+      color: rgba(255,255,255,.30);
+    }
+    .footer-bottom p + p { margin-top: 4px; }
+
+    /* ===== DIVIDER ===== */
+    .gold-rule {
+      border: none;
+      height: 2px;
+      background: linear-gradient(90deg, transparent 0%, var(--gold) 30%, var(--gold) 70%, transparent 100%);
+      opacity: .25;
+      margin: 0;
+    }
+
+    /* ===== SCROLL REVEAL CARDS ===== */
+    @media (prefers-reduced-motion: no-preference) {
+      .card { will-change: transform; }
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (min-width: 640px) {
+      .hero { padding: 80px 24px; }
+      .hero-inner { grid-template-columns: auto 1fr; gap: 32px; align-items: center; }
+      .hero-logo-col { display: flex; align-items: center; }
+      .hero-logo {
+        width: 110px;
+        height: 110px;
+        border-radius: 50%;
+        background: rgba(255,255,255,.10);
+        border: 2px solid rgba(255,255,255,.20);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(6px);
+        font-size: 42px;
+      }
+      .page-wrap { padding: 0 24px; }
+    }
+
+    @media (min-width: 768px) {
+      .two-col { grid-template-columns: 1.4fr 1fr; }
+      .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; }
+      .nostalgia-grid { gap: 20px; }
+    }
+
+    @media (min-width: 1024px) {
+      .section { padding: 64px 0; }
+    }
+
+    /* ===== MOBILE TOUCH TARGETS (44px min) ===== */
+    @media (max-width: 639px) {
+      .btn { min-height: 44px; padding: 12px 20px; font-size: 15px; }
+      .hero-ctas { flex-direction: column; align-items: flex-start; }
+      .todo-box { width: 22px; height: 22px; }
+      .footer-links a { min-height: 44px; display: flex; align-items: center; }
     }
   </style>
 </head>
-<body class="bg-gray-50 text-gray-800 leading-relaxed">
-  
+<body>
+
   <!-- Topbar -->
-  <div class="bg-tchs-navy text-white/90 py-2 px-4 text-center text-sm">
-    <span class="opacity-75">Planning in progress — Tates Creek High School Class of 2003 Reunion</span>
+  <div class="topbar">
+    <strong>Commodores '03</strong> — Planning in progress · Tates Creek High School Class of 2003 · Lexington, KY
   </div>
 
-  <!-- Hero Section -->
-  <header class="hero-bg min-h-[420px] flex items-center py-12 px-4">
-    <div class="max-w-6xl mx-auto w-full">
-      <div class="grid md:grid-cols-[120px_1fr] gap-6 items-center">
-        <!-- Logo -->
-        <div class="hidden md:flex justify-center">
-          <div class="w-24 h-24 rounded-full bg-white/10 border border-white/20 flex items-center justify-center backdrop-blur-sm">
-            <img 
-              src="https://resources.finalsite.net/images/f_auto,q_auto/v1683666284/fcpsnet/defi7kkcila52uw86jvx/LogoBlue.png" 
-              alt="TCHS Logo" 
-              class="w-20 h-20 object-contain"
-            />
-          </div>
-        </div>
-        
-        <!-- Hero Content -->
-        <div class="text-center md:text-left">
-          <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-3 tracking-tight">
-            Commodores '03 — <span class="text-commodore-gold">25 Years Later!</span>
-          </h1>
-          <p class="text-lg text-blue-100/80 mb-6 font-light max-w-2xl">
-            Tates Creek High School • Lexington, Kentucky • Summer/Fall 2028<br/>
-            Let's bring the Commodores back together.
-          </p>
-          
-          <!-- Hero Actions -->
-          <div class="flex flex-wrap gap-3 justify-center md:justify-start">
-            <a 
-              href="https://forms.gle/abc" 
-              target="_blank" 
-              rel="noopener"
-              class="btn-gold px-6 py-3 rounded-full font-semibold text-sm flex items-center gap-2 touch-target min-h-[44px]"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
-              </svg>
-              RSVP Now (Form Coming Soon)
-            </a>
-            <a 
-              href="#agenda" 
-              class="btn-outline-gold px-6 py-3 rounded-full font-semibold text-sm flex items-center gap-2 touch-target min-h-[44px]"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-              </svg>
-              View Agenda
-            </a>
-            <a 
-              href="mailto:tchs2003reunion@gmail.com?subject=TCHS%202003%20Reunion%20Question"
-              class="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-6 py-3 rounded-full font-semibold text-sm transition-all flex items-center gap-2 touch-target min-h-[44px]"
-            >
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-              </svg>
-              Contact
-            </a>
-          </div>
-        </div>
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-inner">
+
+      <!-- Logo (desktop only, via grid column) -->
+      <div class="hero-logo-col" aria-hidden="true">
+        <div class="hero-logo" title="TCHS Commodores">⚓</div>
       </div>
-    </div>
-  </header>
 
-  <!-- Main Content -->
-  <main class="max-w-6xl mx-auto px-4 py-10">
-    <div class="grid lg:grid-cols-[1.4fr_1fr] gap-6">
-      
-      <!-- Left Column -->
-      <section class="bg-white rounded-2xl border border-gray-200/60 p-6 card-hover shadow-sm" id="agenda">
-        <div class="flex items-center gap-2 mb-1">
-          <div class="h-1 w-6 bg-commodore-gold rounded"></div>
-          <span class="text-xs font-bold tracking-wider text-gray-500 uppercase">Suggested Format</span>
-        </div>
-        
-        <h2 class="text-2xl font-bold text-gray-900 mb-2">Draft 3-Part Reunion Agenda</h2>
-        <p class="text-gray-500 text-sm mb-6">A proven format: low-pressure welcome, main event, family-friendly closeout.</p>
+      <!-- Hero text -->
+      <div class="hero-text">
+        <div class="hero-badge">TCHS Class of 2003 · 25th Reunion</div>
 
-        <div class="space-y-5 mb-8">
-          <div class="agenda-item py-1">
-            <h3 class="font-semibold text-gray-800">Friday Night — Welcome Mixer</h3>
-            <span class="text-sm text-gray-500">7:00–10:00 PM • Casual bar/rooftop setting</span>
-            <p class="text-gray-600 text-sm mt-1">Name tags, throwback playlist, slideshow wall—first reconnects.</p>
-          </div>
-          
-          <div class="agenda-item py-1">
-            <h3 class="font-semibold text-gray-800">Saturday — Main Reunion Event</h3>
-            <span class="text-sm text-gray-500">6:00–11:00 PM • Dinner, remarks & memories</span>
-            <p class="text-gray-600 text-sm mt-1">Memory reel, "where are we now" shares, teacher shoutouts, photo booth.</p>
-          </div>
-          
-          <div class="agenda-item py-1">
-            <h3 class="font-semibold text-gray-800">Sunday — Family Brunch / School Walk</h3>
-            <span class="text-sm text-gray-500">10:30 AM–12:30 PM • Optional</span>
-            <p class="text-gray-600 text-sm mt-1">Perfect for spouses, kids, and one last goodbye.</p>
-          </div>
-        </div>
+        <h1>Commodores&nbsp;'03 —<br/><em>25 Years Later!</em></h1>
 
-        <h3 class="text-lg font-semibold text-gray-900 mb-3">Venue Shortlist</h3>
-        <ul class="space-y-2 text-sm text-gray-700">
-          <li class="flex items-start gap-2">
-            <span class="text-commodore-gold font-semibold">1.</span>
-            <span><strong>The Campbell House</strong> — Classic Lexington, ballroom-style</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-commodore-gold font-semibold">2.</span>
-            <span><strong>Hilton Lexington/Downtown</strong> — Central, great for out-of-towners</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-commodore-gold font-semibold">3.</span>
-            <span><strong>Marriott Griffin Gate</strong> — Large capacity, room blocks</span>
-          </li>
-          <li class="flex items-start gap-2">
-            <span class="text-commodore-gold font-semibold">4.</span>
-            <span><strong>21c Museum Hotel</strong> — Modern mixers + photogenic</span>
-          </li>
-        </ul>
+        <p class="hero-sub">
+          Tates Creek High School · Lexington, Kentucky<br/>
+          Summer / Fall 2028 · Let's bring it back.
+        </p>
 
-        <div class="mt-6 p-4 bg-amber-50/50 rounded-xl border border-amber-200/50">
-          <h4 class="font-semibold text-gray-800 text-sm mb-2">Top Picks + Budget Range</h4>
-          <ul class="text-sm text-gray-700 space-y-1">
-            <li><strong>#1 Campbell House:</strong> ~$95–$140/person</li>
-            <li><strong>#2 Hilton Downtown:</strong> ~$110–$165/person (hotel convenience)</li>
-          </ul>
-        </div>
-      </section>
+        <div class="hero-ctas">
+          <a
+            href="https://forms.gle/abc"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-gold"
+            aria-label="RSVP — form coming soon"
+          >
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+            </svg>
+            RSVP Now
+          </a>
 
-      <!-- Right Column -->
-      <aside class="space-y-6">
-        <!-- RSVP Card -->
-        <div class="bg-white rounded-2xl border border-gray-200/60 p-6 card-hover shadow-sm" id="rsvp">
-          <div class="flex items-center gap-2 mb-1">
-            <div class="h-1 w-6 bg-tchs-maroon rounded"></div>
-            <span class="text-xs font-bold tracking-wider text-gray-500 uppercase">RSVP</span>
-          </div>
-          <h2 class="text-xl font-bold text-gray-900 mb-3">Planning to Attend?</h2>
-          
-          <p class="text-sm text-gray-600 mb-4">
-            The official RSVP form is being finalized. For now, let us know you're interested and we'll keep you updated!
-          </p>
-          
-          <div class="space-y-3 mb-4">
-            <a 
-              href="https://forms.gle/abc" 
-              target="_blank" 
-              class="btn-gold w-full text-center py-3 rounded-xl font-semibold text-sm block touch-target min-h-[44px]"
-            >
-              📝 Get on the List
-            </a>
-            <p class="text-xs text-gray-500 text-center">
-              Google Form link pending — check back soon!
-            </p>
-          </div>
-          
-          <div class="flex flex-wrap gap-2 mb-4">
-            <span class="pill text-xs font-medium px-3 py-1 rounded-full">Google Forms</span>
-            <span class="pill text-xs font-medium px-3 py-1 rounded-full">Eventbrite (Soon)</span>
-            <span class="pill text-xs font-medium px-3 py-1 rounded-full">Email Updates</span>
-          </div>
+          <a href="#agenda" class="btn btn-outline">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            View Agenda
+          </a>
 
-          <ul class="text-sm text-gray-600 space-y-2 border-t border-gray-100 pt-4">
-            <li class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              Name, +1, contact info
-            </li>
-            <li class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              Attendance: Yes / Maybe / No
-            </li>
-            <li class="flex items-center gap-2">
-              <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-              </svg>
-              Shirt size & dietary needs
-            </li>
-          </ul>
-          
-          <div class="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-100">
-            <div class="flex items-start gap-2 text-sm">
-              <span class="text-blue-600">ℹ️</span>
-              <span class="text-gray-600">Form link will be updated to the official form shortly.</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Organizer Card -->
-        <div class="bg-white rounded-2xl border border-gray-200/60 p-6 card-hover shadow-sm">
-          <div class="flex items-center gap-2 mb-1">
-            <div class="h-1 w-6 bg-tchs-navy rounded"></div>
-            <span class="text-xs font-bold tracking-wider text-gray-500 uppercase">To-Do</span>
-          </div>
-          <h2 class="text-xl font-bold text-gray-900 mb-3">Organizer Checklist</h2>
-          <ul class="space-y-3">
-            <li class="flex items-start gap-3">
-              <input type="checkbox" class="mt-1 w-4 h-4 text-commodore-gold border-gray-300 rounded touch-target min-h-[44px] min-w-[44px]" disabled/>
-              <span class="text-sm text-gray-700">Book venue 9–12 months out</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <input type="checkbox" class="mt-1 w-4 h-4 text-commodore-gold border-gray-300 rounded touch-target min-h-[44px] min-w-[44px]" disabled/>
-              <span class="text-sm text-gray-700">Publish hotel block by spring 2028</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <input type="checkbox" class="mt-1 w-4 h-4 text-commodore-gold border-gray-300 rounded touch-target min-h-[44px] min-w-[44px]" disabled/>
-              <span class="text-sm text-gray-700">Post monthly classmate spotlights</span>
-            </li>
-            <li class="flex items-start gap-3">
-              <input type="checkbox" class="mt-1 w-4 h-4 text-commodore-gold border-gray-300 rounded touch-target min-h-[44px] min-w-[44px]" disabled/>
-              <span class="text-sm text-gray-700">Create memory gallery (then/now)</span>
-            </li>
-          </ul>
-        </div>
-      </aside>
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="bg-tchs-navy text-gray-300 mt-12">
-    <div class="max-w-6xl mx-auto px-4 py-10">
-      <div class="grid md:grid-cols-3 gap-8">
-        <!-- Brand -->
-        <div>
-          <h3 class="text-white font-bold text-lg mb-2">Commodores '03</h3>
-          <p class="text-sm text-gray-400">Tates Creek High School Class of 2003<br/>25th Reunion</p>
-        </div>
-        
-        <!-- Links -->
-        <div>
-          <h4 class="text-white font-semibold text-sm mb-3 uppercase tracking-wider">Quick Links</h4>
-          <ul class="space-y-2 text-sm">
-            <li><a href="#agenda" class="hover:text-commodore-gold transition-colors">Agenda</a></li>
-            <li><a href="#rsvp" class="hover:text-commodore-gold transition-colors">RSVP</a></li>
-            <li><a href="mailto:tchs2003reunion@gmail.com" class="hover:text-commodore-gold transition-colors">Contact Organizers</a></li>
-          </ul>
-        </div>
-        
-        <!-- Contact -->
-        <div>
-          <h4 class="text-white font-semibold text-sm mb-3 uppercase tracking-wider">Get in Touch</h4>
-          <p class="text-sm text-gray-400">Questions about the reunion?</p>
-          <a href="mailto:tchs2003reunion@gmail.com" class="text-commodore-gold hover:text-white transition-colors text-sm">
-            tchs2003reunion@gmail.com
+          <a href="mailto:tchs2003reunion@gmail.com?subject=TCHS%202003%20Reunion" class="btn btn-ghost">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            Contact
           </a>
         </div>
       </div>
-      
-      <div class="border-t border-gray-800 mt-8 pt-8 text-center">
-        <p class="text-xs text-gray-500">
-          Design inspired by TCHS/FCPS branding. Unofficial community site—not an FCPS publication.
-        </p>
-        <p class="text-xs text-gray-600 mt-1">
-          © 2026 TCHS Class of 2003 Reunion Committee
-        </p>
+
+    </div>
+  </header>
+
+  <hr class="gold-rule" />
+
+  <!-- Main Content -->
+  <main>
+    <div class="page-wrap section">
+      <div class="two-col">
+
+        <!-- LEFT: Agenda + Venues -->
+        <section class="card" id="agenda">
+          <div class="section-eyebrow">
+            <div class="eyebrow-bar"></div>
+            <span class="eyebrow-text">Suggested Format</span>
+          </div>
+          <h2>Draft 3-Part Reunion Agenda</h2>
+          <p class="card-desc">A proven format — low-pressure welcome, main event, family-friendly closeout.</p>
+
+          <ul class="agenda-list" aria-label="Reunion agenda items">
+            <li class="agenda-item">
+              <div class="agenda-num">1</div>
+              <div>
+                <div class="agenda-title">Friday Night — Welcome Mixer</div>
+                <div class="agenda-time">7:00–10:00 PM · Casual bar / rooftop</div>
+                <div class="agenda-desc">Name tags, throwback playlist, slideshow wall — first reconnects. Low pressure, high nostalgia.</div>
+              </div>
+            </li>
+            <li class="agenda-item">
+              <div class="agenda-num">2</div>
+              <div>
+                <div class="agenda-title">Saturday — Main Reunion Event</div>
+                <div class="agenda-time">6:00–11:00 PM · Dinner, remarks &amp; memories</div>
+                <div class="agenda-desc">Memory reel, "where are we now" shares, teacher shoutouts, photo booth, awards.</div>
+              </div>
+            </li>
+            <li class="agenda-item">
+              <div class="agenda-num">3</div>
+              <div>
+                <div class="agenda-title">Sunday — Family Brunch / School Walk</div>
+                <div class="agenda-time">10:30 AM–12:30 PM · Optional</div>
+                <div class="agenda-desc">Perfect for spouses, kids, and one last goodbye. Maybe a walk through TCHS hallways.</div>
+              </div>
+            </li>
+          </ul>
+
+          <div style="margin-top: 28px;">
+            <div class="section-eyebrow">
+              <div class="eyebrow-bar" style="background: var(--maroon);"></div>
+              <span class="eyebrow-text">Venue Shortlist</span>
+            </div>
+            <div class="venue-grid">
+              <div class="venue-row">
+                <div class="venue-rank">1.</div>
+                <div>
+                  <div class="venue-name">The Campbell House</div>
+                  <div class="venue-detail">Classic Lexington, ballroom-style · ~$95–$140/person</div>
+                </div>
+              </div>
+              <div class="venue-row">
+                <div class="venue-rank">2.</div>
+                <div>
+                  <div class="venue-name">Hilton Lexington / Downtown</div>
+                  <div class="venue-detail">Central, great for out-of-towners · ~$110–$165/person</div>
+                </div>
+              </div>
+              <div class="venue-row">
+                <div class="venue-rank">3.</div>
+                <div>
+                  <div class="venue-name">Marriott Griffin Gate</div>
+                  <div class="venue-detail">Large capacity, room blocks available</div>
+                </div>
+              </div>
+              <div class="venue-row">
+                <div class="venue-rank">4.</div>
+                <div>
+                  <div class="venue-name">21c Museum Hotel</div>
+                  <div class="venue-detail">Modern mixers + incredibly photogenic</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- RIGHT: RSVP + Checklist -->
+        <aside>
+
+          <!-- RSVP Card -->
+          <div class="card" id="rsvp" style="margin-bottom: 24px;">
+            <div class="section-eyebrow">
+              <div class="eyebrow-bar" style="background: var(--maroon);"></div>
+              <span class="eyebrow-text">RSVP</span>
+            </div>
+            <h2>Planning to Attend?</h2>
+
+            <div class="rsvp-form-status" style="margin: 16px 0;">
+              <div class="live-pill" style="margin: 0 auto 10px; width: fit-content;">
+                <span class="live-dot" aria-hidden="true"></span>
+                Form Going Live Soon
+              </div>
+              <div class="rsvp-form-status-title">Official RSVP Form — Coming Soon</div>
+              <div class="rsvp-form-status-sub">Sign up below to get the link the moment it drops</div>
+            </div>
+
+            <a
+              href="https://forms.gle/abc"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn btn-gold"
+              style="width: 100%; justify-content: center; border-radius: 14px; font-size: 15px; padding: 14px 24px;"
+            >
+              <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+              </svg>
+              📝 Get on the List
+            </a>
+
+            <div class="tag-row">
+              <span class="tag">Google Forms</span>
+              <span class="tag">Eventbrite (Soon)</span>
+              <span class="tag">Email Updates</span>
+            </div>
+
+            <ul class="check-list" aria-label="RSVP form fields">
+              <li>
+                <div class="check-icon">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                Name, +1, contact info
+              </li>
+              <li>
+                <div class="check-icon">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                Attendance: Yes / Maybe / No
+              </li>
+              <li>
+                <div class="check-icon">
+                  <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="3" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+                  </svg>
+                </div>
+                Shirt size &amp; dietary needs
+              </li>
+            </ul>
+
+            <div class="rsvp-note" role="status" aria-live="polite">
+              <span class="rsvp-note-icon">ℹ️</span>
+              <span>The RSVP link will go live once the organizer team finalizes the form. <strong>Check back soon</strong> — we're actively setting it up.</span>
+            </div>
+          </div>
+
+          <!-- Organizer Checklist Card -->
+          <div class="card">
+            <div class="section-eyebrow">
+              <div class="eyebrow-bar" style="background: var(--navy);"></div>
+              <span class="eyebrow-text">Organizer To-Do</span>
+            </div>
+            <h2>Planning Checklist</h2>
+            <ul class="todo-list" aria-label="Organizer checklist">
+              <li class="todo-item">
+                <div class="todo-box" role="checkbox" aria-checked="false" aria-label="Book venue 9–12 months out"></div>
+                <span class="todo-text">Book venue 9–12 months out</span>
+              </li>
+              <li class="todo-item">
+                <div class="todo-box" role="checkbox" aria-checked="false" aria-label="Publish hotel block by spring 2028"></div>
+                <span class="todo-text">Publish hotel block by spring 2028</span>
+              </li>
+              <li class="todo-item">
+                <div class="todo-box" role="checkbox" aria-checked="false" aria-label="Launch official RSVP form"></div>
+                <span class="todo-text">Launch official RSVP form 🔜</span>
+              </li>
+              <li class="todo-item">
+                <div class="todo-box" role="checkbox" aria-checked="false" aria-label="Post monthly classmate spotlights"></div>
+                <span class="todo-text">Post monthly classmate spotlights</span>
+              </li>
+              <li class="todo-item">
+                <div class="todo-box" role="checkbox" aria-checked="false" aria-label="Create then/now memory gallery"></div>
+                <span class="todo-text">Create then / now memory gallery</span>
+              </li>
+            </ul>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+
+    <!-- Nostalgia Strip -->
+    <div class="nostalgia-strip">
+      <div class="page-wrap">
+        <h2>The Class of '03 — Where Were You?</h2>
+        <p>A few things that defined our senior year and the world we graduated into</p>
+        <div class="nostalgia-grid" role="list">
+          <div class="nostalgia-item" role="listitem">
+            <span class="ni-year">2002–03</span>
+            Finding Nemo in theatres
+          </div>
+          <div class="nostalgia-item" role="listitem">
+            <span class="ni-year">2002–03</span>
+            Slim shady &amp; Justin Timberlake
+          </div>
+          <div class="nostalgia-item" role="listitem">
+            <span class="ni-year">Senior Year</span>
+            Flip phones &amp; AIM away messages
+          </div>
+          <div class="nostalgia-item" role="listitem">
+            <span class="ni-year">Senior Year</span>
+            Prom &amp; senior skip day
+          </div>
+          <div class="nostalgia-item" role="listitem">
+            <span class="ni-year">TCHS '03</span>
+            Commodores pride 🏆
+          </div>
+          <div class="nostalgia-item" role="listitem">
+            <span class="ni-year">2003</span>
+            Myspace debuts
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+          <h3>Commodores '03</h3>
+          <p>
+            Tates Creek High School<br/>
+            Class of 2003 · 25th Reunion<br/>
+            Lexington, Kentucky
+          </p>
+          <div style="margin-top: 16px;">
+            <a href="mailto:tchs2003reunion@gmail.com" class="footer-contact-email">tchs2003reunion@gmail.com</a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#agenda">Agenda</a></li>
+            <li><a href="#rsvp">RSVP</a></li>
+            <li><a href="mailto:tchs2003reunion@gmail.com">Contact Organizers</a></li>
+          </ul>
+        </div>
+
+        <!-- RSVP -->
+        <div class="footer-col">
+          <h4>Stay Updated</h4>
+          <p style="font-size: 13px; margin-bottom: 14px;">RSVP form launching soon — don't miss it.</p>
+          <a
+            href="https://forms.gle/abc"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-gold"
+            style="width: 100%; justify-content: center;"
+          >
+            RSVP Now
+          </a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <p>Design inspired by TCHS / FCPS branding. Unofficial community site — not an FCPS publication.</p>
+        <p>© 2026 TCHS Class of 2003 Reunion Committee · Made with ❤️ by Commodores for Commodores</p>
       </div>
     </div>
   </footer>
