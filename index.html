@@ -159,6 +159,8 @@
       .grid { grid-template-columns: 1fr; }
       .hero-grid { grid-template-columns: 1fr; text-align: center; }
       .logo { margin: 0 auto; }
+      .hero-actions { justify-content: center; }
+      .hero-actions .btn, form .btn { width: 100%; text-align: center; }
     }
   </style>
 </head>
@@ -175,8 +177,9 @@
           <h1>Tates Creek High School<br>Class of 2003 — 25th Reunion</h1>
           <p class="lead">Lexington, Kentucky • Summer/Fall 2028 • Let’s get the Commodores back together.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="#rsvp">RSVP Interest</a>
+            <a class="btn btn-primary" href="https://forms.gle/REPLACE_WITH_CLASS_FORM" target="_blank" rel="noopener">RSVP Now</a>
             <a class="btn btn-secondary" href="#agenda">View Draft Agenda</a>
+            <a class="btn btn-secondary" href="mailto:tchs2003reunion@gmail.com?subject=TCHS%202003%20Reunion%20Question">Contact Organizers</a>
           </div>
         </div>
       </div>
@@ -208,12 +211,15 @@
           <p>Great for people traveling with spouses/kids and one last goodbye window.</p>
         </div>
 
-        <h3>Possible venue ideas in Lexington</h3>
+        <h3>Venue shortlist (v1.1)</h3>
         <ul>
-          <li>Downtown hotel ballroom (easy for out-of-town classmates)</li>
-          <li>Private event space near Distillery District</li>
-          <li>Country club / banquet venue with parking + AV</li>
+          <li><strong>The Campbell House</strong> — classic Lexington feel, good for ballroom-style main event</li>
+          <li><strong>Hilton Lexington/Downtown</strong> — central location, easy hotel logistics for out-of-town classmates</li>
+          <li><strong>Marriott Griffin Gate</strong> — large-capacity option with parking + room block potential</li>
+          <li><strong>21c Museum Hotel</strong> — modern vibe for Friday mixer + photo-heavy atmosphere</li>
+          <li><strong>The Mane on Main</strong> — rooftop/social setting for casual kickoff</li>
         </ul>
+        <p class="meta">Selection criteria: central location, parking/hotel access, AV support, flexible food-and-beverage minimums, and clear weather backup.</p>
       </section>
 
       <aside class="card" id="rsvp">
@@ -239,7 +245,8 @@
             <option>Can’t attend but share updates/photos</option>
           </select>
           <textarea rows="3" placeholder="Any classmates we should make sure to contact?"></textarea>
-          <button class="btn btn-primary" type="button">Submit RSVP Interest</button>
+          <a class="btn btn-primary" href="https://forms.gle/REPLACE_WITH_CLASS_FORM" target="_blank" rel="noopener">Open RSVP Form</a>
+          <a class="btn" style="background:#eef2ff;color:#1f2937;border:1px solid #c7d2fe;" href="https://www.eventbrite.com/" target="_blank" rel="noopener">Buy Tickets (when live)</a>
         </form>
 
         <h3 style="margin-top:1rem;">Organizer checklist (high impact)</h3>
