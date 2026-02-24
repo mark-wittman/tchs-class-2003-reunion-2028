@@ -222,10 +222,27 @@
       margin-top: 16px;
     }
 
+    .yearbook-grid {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .yearbook-tile {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      background: #fff;
+    }
+
+    .yearbook-tile strong { display:block; margin-bottom: 4px; }
+
     @media (max-width: 920px) {
       .hero-inner, .grid { grid-template-columns: 1fr; }
       .btn { width: 100%; }
       .hero { text-align: left; }
+      .yearbook-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
@@ -260,7 +277,30 @@
   <main>
     <div class="container grid">
       <section class="card" id="agenda">
-        <div class="kicker">Weekend plan</div>
+        <div class="kicker">Digital yearbooks</div>
+        <h2>TCHS Yearbooks Archive (in progress)</h2>
+        <p class="meta">We’re adding full digital scans so classmates can browse all four years in one place.</p>
+        <div class="yearbook-grid">
+          <article class="yearbook-tile">
+            <strong>Freshman Year</strong>
+            <span class="meta">Upload scan PDF (coming soon)</span>
+          </article>
+          <article class="yearbook-tile">
+            <strong>Sophomore Year</strong>
+            <span class="meta">Upload scan PDF (coming soon)</span>
+          </article>
+          <article class="yearbook-tile">
+            <strong>Junior Year</strong>
+            <span class="meta">Upload scan PDF (coming soon)</span>
+          </article>
+          <article class="yearbook-tile">
+            <strong>Senior Year (2003)</strong>
+            <span class="meta">Upload scan PDF (coming soon)</span>
+          </article>
+        </div>
+        <p class="meta" style="margin-top:10px;">If you have clean scans or original books, email organizers to help complete the archive.</p>
+
+        <div class="kicker" style="margin-top:16px;">Weekend plan</div>
         <h2>Agenda that actually works</h2>
         <p class="meta">Designed for both local classmates and fly-ins.</p>
 
