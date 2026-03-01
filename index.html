@@ -1,392 +1,801 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TCHS Class of 2003 — 25th Reunion</title>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TCHS '03 — 25th Reunion</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --navy: #0b1220;
-      --navy-2: #121b2e;
-      --maroon: #76263b;
-      --maroon-2: #8e324b;
-      --gold: #d4a017;
-      --ink: #172033;
-      --muted: #667085;
-      --line: #e8ecf4;
-      --bg: #f6f8fc;
-      --card: #ffffff;
-      --radius: 16px;
-      --shadow: 0 12px 30px rgba(15, 23, 42, .08);
+      --navy: #0C1A2E;
+      --navy-deep: #070E1A;
+      --navy-light: #162540;
+      --maroon: #7A2C3F;
+      --gold: #C9982E;
+      --gold-light: #D4A83C;
+      --cream: #FAFAF7;
+      --white: #FFFFFF;
+      --ink: #1A1D2E;
+      --ink-2: #5A5D6E;
+      --ink-3: #94959E;
+      --line: #E8E8E4;
+      --radius: 12px;
+      --radius-lg: 20px;
     }
 
-    * { box-sizing: border-box; }
-    html, body { margin: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
     body {
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
       color: var(--ink);
-      background: radial-gradient(1200px 500px at 20% -10%, #dde8ff 0, transparent 60%), var(--bg);
-      line-height: 1.5;
+      background: var(--cream);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    .container { width: min(1100px, 92vw); margin: 0 auto; }
+    .container { width: min(1120px, 88vw); margin: 0 auto; }
+    .container-narrow { width: min(800px, 88vw); margin: 0 auto; }
 
-    .topline {
-      font-size: 13px;
-      letter-spacing: .02em;
-      color: #d5dcf3;
+    /* ===== PASSWORD GATE ===== */
+    .gate {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--navy);
+      transition: opacity 0.6s ease, visibility 0.6s ease;
+    }
+    .gate.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .gate-inner { text-align: center; color: white; width: min(380px, 88vw); }
+    .gate-brand {
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 20px;
+    }
+    .gate-line {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      margin: 0 auto 28px;
+      opacity: 0.5;
+    }
+    .gate-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 32px;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+    .gate-sub {
+      font-size: 15px;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 36px;
+    }
+    .gate-input {
+      width: 100%;
+      padding: 15px 18px;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.05);
+      color: white;
+      font-size: 16px;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
       text-align: center;
-      background: #0a1020;
-      padding: 10px 12px;
+      letter-spacing: 0.08em;
     }
+    .gate-input::placeholder { color: rgba(255,255,255,0.25); }
+    .gate-input:focus { border-color: rgba(255,255,255,0.3); }
+    .gate-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: var(--gold);
+      color: var(--navy);
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.02em;
+    }
+    .gate-btn:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .gate-error {
+      margin-top: 14px;
+      font-size: 13px;
+      color: #e8736f;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .gate-error.show { opacity: 1; }
 
+    /* ===== SITE WRAPPER ===== */
+    .site { opacity: 0; transition: opacity 0.6s ease 0.3s; }
+    .site.visible { opacity: 1; }
+
+    /* ===== HERO ===== */
     .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: var(--navy);
+      color: white;
       position: relative;
       overflow: hidden;
-      background:
-        linear-gradient(130deg, rgba(10,16,32,.90), rgba(18,27,46,.86)),
-        linear-gradient(45deg, rgba(118,38,59,.35), transparent 60%),
-        url('https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1800&auto=format&fit=crop');
-      background-size: cover;
-      background-position: center;
-      color: white;
-      border-bottom: 1px solid rgba(255,255,255,.12);
+      padding: 80px 24px;
     }
-
-    .hero::after {
-      content: "";
+    .hero::before {
+      content: '';
       position: absolute;
-      inset: 0;
-      background: radial-gradient(500px 300px at 90% 10%, rgba(118,38,59,.45), transparent 70%);
+      width: 900px;
+      height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(122,44,63,0.18) 0%, transparent 70%);
+      top: -250px;
+      right: -250px;
       pointer-events: none;
     }
-
-    .hero-inner {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: 1.2fr .8fr;
-      gap: 24px;
-      padding: 42px 0 36px;
-      align-items: center;
+    .hero::after {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,152,46,0.06) 0%, transparent 70%);
+      bottom: -150px;
+      left: -100px;
+      pointer-events: none;
     }
-
-    .brandline {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 12px;
-      border: 1px solid rgba(255,255,255,.2);
-      border-radius: 999px;
+    .hero-content { position: relative; z-index: 1; max-width: 700px; }
+    .hero-kicker {
       font-size: 12px;
-      color: #dbe6ff;
-      margin-bottom: 14px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 32px;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(52px, 9vw, 100px);
+      font-weight: 400;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .hero-year {
+      display: block;
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(18px, 2.5vw, 26px);
+      font-weight: 400;
+      font-style: italic;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+    .hero-lead {
+      font-size: clamp(16px, 1.6vw, 18px);
+      color: rgba(255,255,255,0.45);
+      max-width: 480px;
+      margin: 0 auto 44px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .hero-date {
+      margin-top: 56px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.05em;
     }
 
-    h1 {
-      margin: 0;
-      font-size: clamp(30px, 5vw, 54px);
-      line-height: 1.03;
-      letter-spacing: -0.03em;
-    }
-
-    .lead {
-      margin: 16px 0 22px;
-      color: #ced9f8;
-      max-width: 58ch;
-      font-size: 17px;
-    }
-
-    .actions { display: flex; flex-wrap: wrap; gap: 10px; }
-
+    /* ===== BUTTONS ===== */
     .btn {
-      border: 0;
-      border-radius: 12px;
-      padding: 12px 16px;
-      font-weight: 700;
-      font-size: 14px;
-      cursor: pointer;
-      text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: .2s ease;
+      padding: 14px 30px;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      font-family: inherit;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      letter-spacing: 0.01em;
     }
-    .btn:hover { transform: translateY(-1px); }
-
-    .btn-primary {
-      background: linear-gradient(180deg, #e0af2c, var(--gold));
-      color: #1b2438;
-      box-shadow: 0 8px 20px rgba(212,160,23,.35);
+    .btn-primary { background: var(--gold); color: var(--navy); }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-outline {
+      background: transparent;
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.15);
     }
+    .btn-outline:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.3); }
+    .btn-dark { background: var(--navy); color: white; }
+    .btn-dark:hover { background: var(--navy-light); transform: translateY(-1px); }
 
-    .btn-primary:hover { box-shadow: 0 10px 24px rgba(212,160,23,.45); }
-    .btn-ghost:hover { background: rgba(255,255,255,.14); }
-
-    .btn-ghost {
-      color: #eef3ff;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.2);
+    /* ===== STATS RIBBON ===== */
+    .stats {
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+      padding: 56px 0;
     }
-
-    .hero-card {
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: var(--radius);
-      padding: 16px;
-      backdrop-filter: blur(6px);
-    }
-
-    .hero-card h3 { margin: 0 0 8px; font-size: 16px; }
-    .hero-card p { margin: 0; color: #d9e2ff; font-size: 14px; }
-
-    main { padding: 26px 0 34px; }
-
-    .grid {
+    .stats-grid {
       display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 16px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      text-align: center;
     }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 22px;
-      box-shadow: var(--shadow);
-    }
-
-    .kicker {
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: .08em;
-      color: var(--muted);
+    .stat-number {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 52px;
+      color: var(--navy);
+      line-height: 1;
       margin-bottom: 8px;
-      font-weight: 700;
+    }
+    .stat-label {
+      font-size: 14px;
+      color: var(--ink-3);
+      letter-spacing: 0.02em;
     }
 
-    h2 { margin: 0 0 8px; font-size: 24px; letter-spacing: -0.02em; }
-    h3 { margin: 16px 0 8px; font-size: 18px; }
-    .meta { color: var(--muted); font-size: 14px; }
-
-    .timeline { margin-top: 12px; display: grid; gap: 10px; }
-    .step {
-      border: 1px solid var(--line);
-      border-left: 4px solid var(--maroon);
-      border-radius: 12px;
-      padding: 12px;
-      background: #fff;
-    }
-
-    .step strong { display: block; margin-bottom: 4px; }
-    ul { margin: 8px 0 0; padding-left: 18px; }
-    li { margin: 6px 0; }
-
-    .venue-highlight {
-      border: 1px dashed #d9c0c8;
-      background: linear-gradient(180deg, #fff, #fff8fa);
-      border-radius: 12px;
-      padding: 12px;
-      margin-top: 12px;
-    }
-
-    .stack { display: grid; gap: 12px; }
-
-    .tag {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 999px;
-      border: 1px solid #d9def0;
-      background: #f8faff;
-      color: #344054;
-      font-size: 12px;
-      margin: 4px 6px 0 0;
+    /* ===== SECTION COMMON ===== */
+    .section { padding: 110px 0; }
+    .section-kicker {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-bottom: 14px;
       font-weight: 600;
     }
-
-    .rsvp-box {
-      background: #f8faff;
-      border: 1px solid #dce5fb;
-      border-radius: 12px;
-      padding: 12px;
-      margin-top: 12px;
+    .section-title {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: clamp(34px, 4.5vw, 52px);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 17px;
+      color: var(--ink-2);
+      max-width: 520px;
+      line-height: 1.7;
+      font-weight: 300;
     }
 
-    .footer-note {
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 16px;
-    }
-
-    .yearbook-grid {
-      margin-top: 12px;
+    /* ===== WEEKEND ===== */
+    .weekend { background: var(--cream); }
+    .weekend-grid {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: 56px;
     }
-
-    .yearbook-tile {
+    .day-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 36px 28px;
       border: 1px solid var(--line);
-      border-radius: 12px;
-      padding: 12px;
-      background: #fff;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .day-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 48px rgba(12,26,46,0.07);
+    }
+    .day-card.featured {
+      background: var(--navy);
+      color: white;
+      border-color: transparent;
+    }
+    .day-card.featured .day-label { color: var(--gold); }
+    .day-card.featured .day-time { color: rgba(255,255,255,0.4); }
+    .day-card.featured .day-desc { color: rgba(255,255,255,0.55); }
+    .day-label {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--maroon);
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .day-name {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 26px;
+      font-weight: 400;
+      margin-bottom: 4px;
+      line-height: 1.15;
+    }
+    .day-time {
+      font-size: 14px;
+      color: var(--ink-3);
+      margin-bottom: 16px;
+    }
+    .day-desc {
+      font-size: 15px;
+      color: var(--ink-2);
+      line-height: 1.65;
     }
 
-    .yearbook-tile strong { display:block; margin-bottom: 4px; }
+    /* ===== VENUE ===== */
+    .venue { background: var(--white); }
+    .venue-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 56px;
+    }
+    .venue-card {
+      padding: 36px 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      position: relative;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .venue-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(12,26,46,0.06);
+    }
+    .venue-pick {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--gold);
+      background: rgba(201,152,46,0.08);
+      padding: 5px 12px;
+      border-radius: 6px;
+    }
+    .venue-name {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 24px;
+      font-weight: 400;
+      margin-bottom: 8px;
+    }
+    .venue-price {
+      font-size: 16px;
+      color: var(--ink-2);
+      margin-bottom: 14px;
+      font-weight: 500;
+    }
+    .venue-note {
+      font-size: 15px;
+      color: var(--ink-3);
+      line-height: 1.65;
+    }
+    .venue-also {
+      margin-top: 32px;
+      font-size: 15px;
+      color: var(--ink-3);
+      line-height: 1.7;
+    }
+    .venue-also strong { color: var(--ink-2); font-weight: 500; }
 
-    @media (max-width: 920px) {
-      .hero-inner, .grid { grid-template-columns: 1fr; }
-      .btn { width: 100%; }
-      .hero { text-align: left; }
+    /* ===== YEARBOOKS ===== */
+    .yearbooks { background: var(--cream); }
+    .yearbook-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 56px;
+    }
+    .yearbook-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 32px 20px;
+      text-align: center;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .yearbook-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(12,26,46,0.06);
+    }
+    .yearbook-year {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+    .yearbook-label {
+      font-size: 13px;
+      color: var(--ink-3);
+      margin-bottom: 16px;
+    }
+    .yearbook-status {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--ink-3);
+      background: var(--cream);
+      padding: 5px 12px;
+      border-radius: 6px;
+    }
+
+    /* ===== MILESTONES ===== */
+    .milestones { background: var(--white); }
+    .milestones-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 56px;
+    }
+    .milestone-card {
+      padding: 32px 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+    }
+    .milestone-num {
+      font-family: 'DM Serif Display', Georgia, serif;
+      font-size: 14px;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .milestone-title {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+    .milestone-desc {
+      font-size: 14px;
+      color: var(--ink-3);
+      line-height: 1.6;
+    }
+
+    /* ===== RSVP ===== */
+    .rsvp {
+      background: var(--navy);
+      color: white;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .rsvp::before {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(122,44,63,0.12) 0%, transparent 70%);
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+    .rsvp .section-kicker { color: rgba(255,255,255,0.35); }
+    .rsvp .section-title { color: white; }
+    .rsvp .section-sub { color: rgba(255,255,255,0.45); margin: 0 auto 40px; }
+    .rsvp-fields {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .rsvp-field {
+      font-size: 12px;
+      padding: 7px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.1);
+      color: rgba(255,255,255,0.4);
+      letter-spacing: 0.02em;
+    }
+    .rsvp-contact {
+      margin-top: 28px;
+      font-size: 14px;
+      color: rgba(255,255,255,0.3);
+    }
+    .rsvp-contact a {
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      transition: color 0.2s;
+    }
+    .rsvp-contact a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--navy-deep);
+      color: rgba(255,255,255,0.25);
+      text-align: center;
+      padding: 36px 24px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .footer a {
+      color: rgba(255,255,255,0.35);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer a:hover { color: rgba(255,255,255,0.6); }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .section { padding: 72px 0; }
+      .stats { padding: 40px 0; }
+      .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .stat-number { font-size: 36px; }
+      .stat-label { font-size: 12px; }
+      .weekend-grid { grid-template-columns: 1fr; gap: 14px; }
+      .day-card { padding: 28px 24px; }
+      .venue-grid { grid-template-columns: 1fr; }
       .yearbook-grid { grid-template-columns: 1fr 1fr; }
+      .milestones-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .btn { width: 100%; max-width: 300px; }
+    }
+
+    @media (max-width: 480px) {
+      .stats-grid { grid-template-columns: 1fr; gap: 20px; }
+      .yearbook-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="topline">Unofficial planning site • Tates Creek High School Class of 2003 • 25th Reunion (2028)</div>
 
-  <header class="hero">
-    <div class="container hero-inner">
-      <section>
-        <div class="brandline">
-          <img src="https://resources.finalsite.net/images/f_auto,q_auto/v1683666284/fcpsnet/defi7kkcila52uw86jvx/LogoBlue.png" alt="TCHS logo" width="20" height="20" />
-          Commodores • Lexington, KY
-        </div>
-        <h1>Commodores ’03<br>25 Years Later</h1>
-        <p class="lead">Back where it started — one unforgettable Lexington weekend for the Class of 2003. Reconnect, relive the stories, and make new ones.</p>
-        <div class="actions">
+  <!-- Password Gate -->
+  <div class="gate" id="gate">
+    <div class="gate-inner">
+      <div class="gate-brand">Tates Creek High School</div>
+      <div class="gate-line"></div>
+      <div class="gate-title">Class of 2003</div>
+      <p class="gate-sub">Enter password to continue</p>
+      <form id="gate-form" onsubmit="return false;">
+        <input class="gate-input" type="password" id="gate-pw" placeholder="Password" autocomplete="off" autofocus/>
+        <button class="gate-btn" type="submit">Continue</button>
+        <div class="gate-error" id="gate-error">Incorrect password</div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Site -->
+  <div class="site" id="site">
+
+    <header class="hero">
+      <div class="hero-content">
+        <div class="hero-kicker">Tates Creek High School · Lexington, KY</div>
+        <h1>Commodores<br>'03</h1>
+        <span class="hero-year">Twenty-Five Years Later</span>
+        <p class="hero-lead">One unforgettable Lexington weekend for the Class of 2003. Reconnect, relive the stories, and make new ones.</p>
+        <div class="hero-actions">
           <a class="btn btn-primary" href="https://forms.gle/REPLACE_WITH_CLASS_FORM" target="_blank" rel="noopener">RSVP Now</a>
-          <a class="btn btn-ghost" href="#agenda">See Agenda</a>
-          <a class="btn btn-ghost" href="mailto:tchs2003reunion@gmail.com?subject=TCHS%202003%20Reunion%20Question">Contact Organizers</a>
+          <a class="btn btn-outline" href="#weekend">See the Plan</a>
+          <a class="btn btn-outline" href="mailto:tchs2003reunion@gmail.com">Contact Organizers</a>
         </div>
-      </section>
+        <p class="hero-date">Target window: Fall 2028 · 3-day format</p>
+      </div>
+    </header>
 
-      <aside class="hero-card">
-        <h3>Save the date energy</h3>
-        <p>Target window: <strong>Sept–Oct 2028</strong><br>
-           Suggested format: <strong>Fri mixer + Sat main event + Sun brunch</strong><br>
-           Current pulse: <strong>127 classmates reached so far</strong> (goal: 200+)</p>
-      </aside>
-    </div>
-  </header>
-
-  <main>
-    <div class="container grid">
-      <section class="card" id="agenda">
-        <div class="kicker">Digital yearbooks</div>
-        <h2>TCHS Yearbooks Archive (in progress)</h2>
-        <p class="meta">We’re adding full digital scans so classmates can browse all four years in one place.</p>
-        <div class="yearbook-grid">
-          <article class="yearbook-tile">
-            <strong>Freshman Year</strong>
-            <span class="meta">Upload scan PDF (coming soon)</span>
-          </article>
-          <article class="yearbook-tile">
-            <strong>Sophomore Year</strong>
-            <span class="meta">Upload scan PDF (coming soon)</span>
-          </article>
-          <article class="yearbook-tile">
-            <strong>Junior Year</strong>
-            <span class="meta">Upload scan PDF (coming soon)</span>
-          </article>
-          <article class="yearbook-tile">
-            <strong>Senior Year (2003)</strong>
-            <span class="meta">Upload scan PDF (coming soon)</span>
-          </article>
+    <div class="stats">
+      <div class="container stats-grid reveal">
+        <div>
+          <div class="stat-number">127</div>
+          <div class="stat-label">Classmates Reached</div>
         </div>
-        <p class="meta" style="margin-top:10px;">If you have clean scans or original books, email organizers to help complete the archive.</p>
-
-        <div class="kicker" style="margin-top:16px;">Weekend plan</div>
-        <h2>Agenda that actually works</h2>
-        <p class="meta">Designed for both local classmates and fly-ins.</p>
-
-        <div class="timeline">
-          <article class="step">
-            <strong>Friday (7:00–10:00 PM) — Welcome Mixer</strong>
-            Casual kickoff, name tags, throwback playlist, photo station.
-          </article>
-          <article class="step">
-            <strong>Saturday (6:00–11:00 PM) — Main Reunion Night</strong>
-            Dinner, short remarks, class memories reel, and plenty of hang time.
-          </article>
-          <article class="step">
-            <strong>Sunday (10:30 AM–12:30 PM) — Optional Brunch</strong>
-            Family-friendly wrap-up before departures.
-          </article>
+        <div>
+          <div class="stat-number">42</div>
+          <div class="stat-label">Confirmed Yes</div>
         </div>
-
-        <h3>Venue shortlist</h3>
-        <ul>
-          <li>The Campbell House</li>
-          <li>Hilton Lexington/Downtown</li>
-          <li>Marriott Griffin Gate</li>
-          <li>21c Museum Hotel</li>
-          <li>The Mane on Main</li>
-        </ul>
-
-        <div class="venue-highlight">
-          <strong>Top 2 picks + estimated budget</strong>
-          <ul>
-            <li><strong>#1 Campbell House:</strong> ~$95–$140 per person</li>
-            <li><strong>#2 Hilton Lexington/Downtown:</strong> ~$110–$165 per person</li>
-          </ul>
+        <div>
+          <div class="stat-number">17</div>
+          <div class="stat-label">Out-of-State Travelers</div>
         </div>
-      </section>
-
-      <aside class="stack">
-        <section class="card">
-          <div class="kicker">RSVP flow</div>
-          <h2>Make signup frictionless</h2>
-          <p class="meta">One form now, ticketing link when pricing is final.</p>
-
-          <div>
-            <span class="tag">Google Form</span>
-            <span class="tag">Eventbrite (later)</span>
-            <span class="tag">Email updates</span>
-          </div>
-
-          <div class="rsvp-box">
-            <strong>Needed fields:</strong>
-            <ul>
-              <li>Full name + preferred contact</li>
-              <li>Attendance confidence (yes/maybe/no)</li>
-              <li>+1, dietary notes, city/state</li>
-            </ul>
-            <div class="actions" style="margin-top:10px;">
-              <a class="btn btn-primary" href="https://forms.gle/REPLACE_WITH_CLASS_FORM" target="_blank" rel="noopener">Open RSVP Form</a>
-            </div>
-          </div>
-        </section>
-
-        <section class="card">
-          <div class="kicker">Who’s coming</div>
-          <h2>Classmate momentum</h2>
-          <p class="meta">Early buzz is strong — final numbers update after RSVP form goes live.</p>
-          <ul>
-            <li>127 classmates reached</li>
-            <li>42 verbal “I’m in” responses</li>
-            <li>17 out-of-state classmates planning travel</li>
-          </ul>
-        </section>
-
-        <section class="card">
-          <div class="kicker">Organizer checklist</div>
-          <h2>Next milestones</h2>
-          <ul>
-            <li>Lock venue + date window</li>
-            <li>Publish hotel block details</li>
-            <li>Launch monthly class spotlight posts</li>
-            <li>Collect throwback photos for memory reel</li>
-          </ul>
-        </section>
-      </aside>
+      </div>
     </div>
 
-    <p class="container footer-note">Visual style inspired by TCHS/FCPS palette. Unofficial class project, not an official FCPS property. • Contact: tchs2003reunion@gmail.com • FB Group: coming soon</p>
-  </main>
+    <section class="section weekend" id="weekend">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-kicker">The Weekend</div>
+          <div class="section-title">Three Days,<br>One Reunion</div>
+          <p class="section-sub">Designed for both local classmates and fly-ins. Arrive Friday, celebrate Saturday, wrap up Sunday.</p>
+        </div>
+        <div class="weekend-grid">
+          <div class="day-card reveal">
+            <div class="day-label">Friday</div>
+            <div class="day-name">Welcome Mixer</div>
+            <div class="day-time">7:00 – 10:00 PM</div>
+            <div class="day-desc">Casual kickoff with name tags, a throwback playlist, and a photo station. No pressure — just show up.</div>
+          </div>
+          <div class="day-card featured reveal reveal-delay-1">
+            <div class="day-label">Saturday</div>
+            <div class="day-name">Main Reunion Night</div>
+            <div class="day-time">6:00 – 11:00 PM</div>
+            <div class="day-desc">Dinner, short remarks, class memories reel, and plenty of time to catch up. The main event.</div>
+          </div>
+          <div class="day-card reveal reveal-delay-2">
+            <div class="day-label">Sunday</div>
+            <div class="day-name">Farewell Brunch</div>
+            <div class="day-time">10:30 AM – 12:30 PM</div>
+            <div class="day-desc">Family-friendly wrap-up before departures. Relaxed, easy, and a good goodbye.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section venue" id="venue">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-kicker">The Venue</div>
+          <div class="section-title">Where We'll Gather</div>
+          <p class="section-sub">Two top picks under consideration. Final selection coming soon.</p>
+        </div>
+        <div class="venue-grid reveal">
+          <div class="venue-card">
+            <span class="venue-pick">Top Pick</span>
+            <div class="venue-name">The Campbell House</div>
+            <div class="venue-price">~$95 – $140 / person</div>
+            <div class="venue-note">Historic Lexington venue with classic charm. Great for a reunion with character.</div>
+          </div>
+          <div class="venue-card">
+            <span class="venue-pick">#2</span>
+            <div class="venue-name">Hilton Lexington Downtown</div>
+            <div class="venue-price">~$110 – $165 / person</div>
+            <div class="venue-note">Modern downtown option with hotel block potential. Walk to restaurants and bars.</div>
+          </div>
+        </div>
+        <p class="venue-also reveal">Also considering: <strong>Marriott Griffin Gate · 21c Museum Hotel · The Mane on Main</strong></p>
+      </div>
+    </section>
+
+    <section class="section yearbooks" id="yearbooks">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-kicker">The Archive</div>
+          <div class="section-title">Digital Yearbooks</div>
+          <p class="section-sub">Full digital scans so classmates can browse all four years in one place. Have original books or scans? Email us.</p>
+        </div>
+        <div class="yearbook-grid reveal">
+          <div class="yearbook-card">
+            <div class="yearbook-year">1999–00</div>
+            <div class="yearbook-label">Freshman Year</div>
+            <div class="yearbook-status">Coming Soon</div>
+          </div>
+          <div class="yearbook-card">
+            <div class="yearbook-year">2000–01</div>
+            <div class="yearbook-label">Sophomore Year</div>
+            <div class="yearbook-status">Coming Soon</div>
+          </div>
+          <div class="yearbook-card">
+            <div class="yearbook-year">2001–02</div>
+            <div class="yearbook-label">Junior Year</div>
+            <div class="yearbook-status">Coming Soon</div>
+          </div>
+          <div class="yearbook-card">
+            <div class="yearbook-year">2002–03</div>
+            <div class="yearbook-label">Senior Year</div>
+            <div class="yearbook-status">Coming Soon</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section milestones" id="milestones">
+      <div class="container">
+        <div class="reveal">
+          <div class="section-kicker">What's Next</div>
+          <div class="section-title">Organizer Milestones</div>
+          <p class="section-sub">Key steps ahead to make this weekend happen.</p>
+        </div>
+        <div class="milestones-grid reveal">
+          <div class="milestone-card">
+            <div class="milestone-num">01</div>
+            <div class="milestone-title">Lock venue + date window</div>
+            <div class="milestone-desc">Finalize the location and confirm Sept–Oct 2028 weekend.</div>
+          </div>
+          <div class="milestone-card">
+            <div class="milestone-num">02</div>
+            <div class="milestone-title">Publish hotel block details</div>
+            <div class="milestone-desc">Negotiate group rates and share booking links for out-of-towners.</div>
+          </div>
+          <div class="milestone-card">
+            <div class="milestone-num">03</div>
+            <div class="milestone-title">Launch monthly class spotlights</div>
+            <div class="milestone-desc">Build momentum with classmate features leading up to the reunion.</div>
+          </div>
+          <div class="milestone-card">
+            <div class="milestone-num">04</div>
+            <div class="milestone-title">Collect throwback photos</div>
+            <div class="milestone-desc">Gather photos from all four years for the memories reel at the event.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section rsvp" id="rsvp">
+      <div class="container-narrow reveal">
+        <div class="section-kicker">RSVP</div>
+        <div class="section-title">Ready to Commit?</div>
+        <p class="section-sub">One form. Two minutes. Lock in your spot and we'll keep you updated on every detail.</p>
+        <div class="rsvp-fields">
+          <span class="rsvp-field">Full name</span>
+          <span class="rsvp-field">Contact info</span>
+          <span class="rsvp-field">Attendance</span>
+          <span class="rsvp-field">+1 details</span>
+          <span class="rsvp-field">Dietary notes</span>
+          <span class="rsvp-field">City / state</span>
+        </div>
+        <a class="btn btn-primary" href="https://forms.gle/REPLACE_WITH_CLASS_FORM" target="_blank" rel="noopener">Open RSVP Form</a>
+        <p class="rsvp-contact">Questions? <a href="mailto:tchs2003reunion@gmail.com">tchs2003reunion@gmail.com</a></p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>TCHS Class of 2003 · 25th Reunion · Unofficial class project</p>
+      <p><a href="mailto:tchs2003reunion@gmail.com">tchs2003reunion@gmail.com</a></p>
+    </footer>
+
+  </div>
+
+  <script>
+    (function() {
+      var PASS = 'creekdawgz';
+      var gate = document.getElementById('gate');
+      var site = document.getElementById('site');
+      var form = document.getElementById('gate-form');
+      var pw = document.getElementById('gate-pw');
+      var err = document.getElementById('gate-error');
+
+      function unlock() {
+        gate.classList.add('hidden');
+        site.classList.add('visible');
+        sessionStorage.setItem('tchs03', '1');
+      }
+
+      if (sessionStorage.getItem('tchs03') === '1') unlock();
+
+      form.addEventListener('submit', function() {
+        if (pw.value === PASS) {
+          unlock();
+        } else {
+          err.classList.add('show');
+          pw.value = '';
+          pw.focus();
+          setTimeout(function() { err.classList.remove('show'); }, 2000);
+        }
+      });
+
+      var reveals = document.querySelectorAll('.reveal');
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      reveals.forEach(function(el) { observer.observe(el); });
+    })();
+  </script>
 </body>
 </html>
